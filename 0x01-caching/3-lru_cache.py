@@ -2,7 +2,6 @@
 """ LRU Caching """
 
 from typing import Any
-from time import time
 from collections import OrderedDict
 from base_caching import BaseCaching
 
