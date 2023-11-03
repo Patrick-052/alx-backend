@@ -24,9 +24,6 @@ def hello_world() -> str:
     return render_template('2-index.html')
 
 
-app.config.from_object(Config)
-
-
 @babel.localeselector
 def get_locale() -> str:
     """ Select a language translation to use """
