@@ -46,10 +46,10 @@ class Server:
         assert 0 <= index < len(self.indexed_dataset())
         indexed_dataset = self.indexed_dataset()
         next_index = index + page_size
+        next_index = min(next_index, len(indexed_dataset))
         data = [
-            value for key,
-            value in indexed_dataset.items() if index <= key < next_index
-            if key in indexed_dataset
+            value for key, value in indexed_dataset.items()
+            if index <= key < next_index and key in indexed_dataset
         ]
         return {
             'index': index,
