@@ -40,37 +40,17 @@ class Server:
             }
         return self.__indexed_dataset
 
-    # def get_hyper_index(self, index: int = None, page_size: int = 10) -> dict:
-    #     """ Returns a dictionary containing pagination stats """
-    #     assert type(index) is int and type(page_size) is int
-    #     assert 0 <= index < len(self.indexed_dataset())
-    #     indexed_dataset = self.indexed_dataset()
-    #     next_index = index + page_size
-    #     next_index = min(next_index, len(indexed_dataset))
-    #     data = [
-    #         value for key, value in indexed_dataset.items()
-    #         if index <= key < next_index and key in indexed_dataset
-    #     ]
-    #     return {
-    #         'index': index,
-    #         'next_index': next_index,
-    #         'page_size': page_size,
-    #         'data': data,
-    #     }
-
     def get_hyper_index(self, index: int = 0, page_size: int = 10) -> dict:
         """ Returns a dictionary containing pagination stats """
         assert type(index) is int and type(page_size) is int
         assert 0 <= index < len(self.indexed_dataset())
         indexed_dataset = self.indexed_dataset()
-        data = []
-        next_index = index
-
-        while len(data) < page_size and next_index < len(indexed_dataset):
-            if next_index in indexed_dataset:
-                data.append(indexed_dataset[next_index])
-            next_index += 1
-
+        next_index = index + page_size
+        next_index = min(next_index, len(indexed_dataset))
+        data = [
+            value for key, value in indexed_dataset.items()
+            if index <= key < next_index and key in indexed_dataset
+        ]
         return {
             'index': index,
             'next_index': next_index,
