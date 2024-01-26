@@ -35,7 +35,8 @@ class Server:
             dataset = self.dataset()
             truncated_dataset = dataset[:1000]
             self.__indexed_dataset = {
-                i: dataset[i] for i in range(len(dataset))
+                i: dataset[i]
+                for i in range(len(dataset))
             }
         return self.__indexed_dataset
 
@@ -45,7 +46,11 @@ class Server:
         assert 0 <= index < len(self.indexed_dataset())
         indexed_dataset = self.indexed_dataset()
         next_index = index + page_size
-        data = [value for key, value in indexed_dataset.items() if index <= key < next_index]
+        data = [
+            value for key,
+            value in indexed_dataset.items() if index <= key < next_index
+            if key in indexed_dataset
+        ]
         return {
             'index': index,
             'next_index': next_index,
