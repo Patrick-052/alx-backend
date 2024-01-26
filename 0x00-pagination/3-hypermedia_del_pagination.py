@@ -40,7 +40,7 @@ class Server:
             }
         return self.__indexed_dataset
 
-    def get_hyper_index(self, index: int = 0, page_size: int = 10) -> dict:
+    def get_hyper_index(self, index: int = None, page_size: int = 10) -> dict:
         """ Returns a dictionary containing pagination stats """
         assert type(index) is int and type(page_size) is int
         assert 0 <= index < len(self.indexed_dataset())
